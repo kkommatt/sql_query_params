@@ -9,8 +9,8 @@ from sqlalchemy import (
     Date,
 )
 from sqlalchemy.orm import Mapped, relationship
+
 from services.db_services import Base
-from todo_user.model import TodoUser
 
 
 class User(Base):

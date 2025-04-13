@@ -8,12 +8,11 @@ from starlette.responses import Response
 
 from services.db_services import session
 from services.query_parse import get_all
-from services.query_validation import validate_query_options
 from services.query_parser import parse_query
-from todo_slave.model import ToDoSlave
+from services.query_validation import validate_query_options
 from todo_user.model import TodoUser
-from user.serializer import UserSerializer
 from user.model import User, UserPydantic
+from user.serializer import UserSerializer
 
 user_router = APIRouter(
     prefix="/user",

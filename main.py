@@ -1,16 +1,16 @@
 import uvicorn
 from fastapi import FastAPI
 
-from services.db_services import Base, engine
-from todo.views import todo_router
-from todo_slave.views import todo_slave_router
-from todo_slave_details.views import todo_slave_details_router
 from exc_handlers import (
     ValidationException,
     SQLGenerationException,
     validation_exception_handler,
     sql_exception_handler,
 )
+from services.db_services import Base, engine
+from todo.views import todo_router
+from todo_slave.views import todo_slave_router
+from todo_slave_details.views import todo_slave_details_router
 from user.views import user_router
 
 app = FastAPI()

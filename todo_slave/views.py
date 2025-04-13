@@ -8,8 +8,8 @@ from starlette.responses import Response
 
 from services.db_services import session
 from services.query_parse import get_all
-from services.query_validation import validate_query_options
 from services.query_parser import parse_query
+from services.query_validation import validate_query_options
 from todo.model import ToDo
 from todo_slave.serializer import ToDoSlaveSerializer
 from .model import ToDoSlave, ToDoSlavePydantic
@@ -45,7 +45,7 @@ async def create(todo_input: ToDoSlavePydantic):
 
 @todo_slave_router.patch("/{todo_slave_id}")
 async def update_todo_slave_partly(
-    todo_slave_id: Annotated[int, Path(ge=0)], todo_slave_input: ToDoSlavePydantic
+        todo_slave_id: Annotated[int, Path(ge=0)], todo_slave_input: ToDoSlavePydantic
 ):
     if not session.query(exists().where(ToDoSlave.id == todo_slave_id)).scalar():
         raise HTTPException(status_code=404)

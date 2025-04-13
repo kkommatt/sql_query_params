@@ -1,22 +1,19 @@
 from typing import Annotated
+from urllib.parse import unquote
 
 from fastapi import APIRouter, HTTPException, Path, Request
-from fastapi.responses import ORJSONResponse
 from sqlalchemy import exists
 from sqlalchemy.exc import NoResultFound
-from starlette import status
 from starlette.responses import Response
 
 from services.db_services import session
 from services.query_parse import (
     get_all,
 )
-from services.query_validation import validate_query_options
 from services.query_parser import parse_query
+from services.query_validation import validate_query_options
 from todo.model import ToDo, ToDoPydantic
 from todo.serializer import ToDoSerializer
-from urllib.parse import unquote
-
 from todo_user.model import TodoUser
 
 todo_router = APIRouter(
@@ -71,7 +68,7 @@ async def update_todo(todo_id: Annotated[int, Path(ge=0)], todo_input: ToDoPydan
 
 @todo_router.patch("/{todo_id}")
 async def update_todo_partly(
-    todo_id: Annotated[int, Path(ge=0)], todo_input: ToDoPydantic
+        todo_id: Annotated[int, Path(ge=0)], todo_input: ToDoPydantic
 ):
     if not session.query(exists().where(ToDo.id == todo_id)).scalar():
         raise HTTPException(status_code=404)
